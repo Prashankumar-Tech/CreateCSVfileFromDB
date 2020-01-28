@@ -1,0 +1,104 @@
+﻿USE [master]
+GO
+/****** Object:  Database [EmployeeDB]    Script Date: 1/28/2020 3:29:46 PM ******/
+CREATE DATABASE [EmployeeDB]
+USE [EmployeeDB]
+GO
+/****** Object:  StoredProcedure [dbo].[GetEmployeeReport]    Script Date: 1/28/2020 3:29:46 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+/****** Object:  Table [dbo].[Employee]    Script Date: 1/28/2020 3:29:46 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Employee](
+	[EmployeeID] [int] IDENTITY(1,1) NOT NULL,
+	[Name] [varchar](100) NULL,
+	[Gender] [varchar](100) NULL,
+	[Salary] [int] NULL,
+	[Dept] [varchar](50) NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[EmployeeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[EmployeeType]    Script Date: 1/28/2020 3:29:46 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[EmployeeType](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[EmployeeType] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_EmployeeType] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+SET IDENTITY_INSERT [dbo].[Employee] ON 
+
+GO
+INSERT [dbo].[Employee] ([EmployeeID], [Name], [Gender], [Salary], [Dept]) VALUES (1, N'Daniel', N'Male', 15000, N'IT')
+GO
+INSERT [dbo].[Employee] ([EmployeeID], [Name], [Gender], [Salary], [Dept]) VALUES (2, N'Vincent', N'Male', 15000, N'HR')
+GO
+INSERT [dbo].[Employee] ([EmployeeID], [Name], [Gender], [Salary], [Dept]) VALUES (3, N'Clare', N'Female', 22000, N'HR')
+GO
+INSERT [dbo].[Employee] ([EmployeeID], [Name], [Gender], [Salary], [Dept]) VALUES (4, N'Sean', N'Male', 20000, N'IT')
+GO
+INSERT [dbo].[Employee] ([EmployeeID], [Name], [Gender], [Salary], [Dept]) VALUES (5, N'Susy', N'Female', 25000, N'IT')
+GO
+INSERT [dbo].[Employee] ([EmployeeID], [Name], [Gender], [Salary], [Dept]) VALUES (6, N'Diana', N'Female', 20000, N'HR')
+GO
+INSERT [dbo].[Employee] ([EmployeeID], [Name], [Gender], [Salary], [Dept]) VALUES (7, N'Prashankumar', N'Male', 25000, N'IT')
+GO
+SET IDENTITY_INSERT [dbo].[Employee] OFF
+GO
+SET IDENTITY_INSERT [dbo].[EmployeeType] ON 
+
+GO
+INSERT [dbo].[EmployeeType] ([Id], [EmployeeType]) VALUES (1, N'Internship')
+GO
+INSERT [dbo].[EmployeeType] ([Id], [EmployeeType]) VALUES (2, N'Permanent')
+GO
+INSERT [dbo].[EmployeeType] ([Id], [EmployeeType]) VALUES (3, N'Contract')
+GO
+SET IDENTITY_INSERT [dbo].[EmployeeType] OFF
+GO
+-- =============================================
+-- Author:		<Author,,Name>
+-- Create date: <Create Date,,>
+-- Description:	<Description,,>
+-- =============================================
+CREATE PROCEDURE [dbo].[GetEmployeeReport]	
+AS
+BEGIN
+	SELECT [EmployeeID]
+      ,[Name]
+      ,[Gender]
+      ,[Salary]
+      ,[Dept]
+  FROM [EmployeeDB].[dbo].[Employee]
+
+  SELECT [Id]
+      ,[EmployeeType]
+  FROM [EmployeeDB].[dbo].[EmployeeType]
+
+END
+
+GO
